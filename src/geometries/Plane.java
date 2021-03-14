@@ -14,7 +14,7 @@ public class Plane implements Geometry {
 
 	public Plane(Point3D point1, Point3D point2, Point3D point3) {
 		this.q0 = point1;
-		this.normal = null;
+		this.normal = new Vector(point1).crossProduct(new Vector(point2));
 	}
 
 	public Point3D getQ0() {
@@ -32,7 +32,7 @@ public class Plane implements Geometry {
 	
 	@Override
 	public Vector getNormal(Point3D point) {
-		return null;
+		return normal;
 	}
 
 }
