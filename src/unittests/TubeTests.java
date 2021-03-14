@@ -21,6 +21,7 @@ public class TubeTests {
 
 	/**
 	 * Test method for {@link geometries.Tube#getNormal(primitives.Point3D)}.
+	 * A test that gets a point and expects to get the normal of that point
 	 */
 	@Test
 	public void testGetNormal() {
