@@ -1,6 +1,7 @@
 package geometries;
 
 
+import java.util.LinkedList;
 import java.util.List;
 import primitives.*;
 import static primitives.Util.*;
@@ -86,4 +87,39 @@ public class Polygon implements Geometry {
 	public Vector getNormal(Point3D point) {
 		return plane.getNormal();
 	}
+
+	
+	@Override
+	public List<Point3D> findIntsersections(Ray ray) {
+		Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
+		List<Point3D> result = plane.findIntsersections(ray);
+
+		if(result == null)
+			return null;
+
+		List<Vector> v = new LinkedList<>();
+		for (int i = 0; i < vertices.size(); i++) {
+			v.add(vertices.get(i).subtract(ray.getP0()));
+		}
+
+		int positive = 0, negative = 0;
+		for (int i = 0; i < vertices.size(); i++) {
+			Vector N = v.get(i).crossProduct(v.get((i+1)% vertices.size())).normalize();
+			double scalar = N.dotProduct(ray.getDir());
+
+			if(Util.isZero(scalar))
+				return null;
+
+			if(scalar > 0)
+				positive++;
+			else
+				negative++;
+		}
+
+		if(positive != 0 && negative != 0)
+			return null;
+		else
+			return result;
+	}
+
 }

@@ -1,9 +1,9 @@
 package primitives;
 
 public class Point3D {
- Coordinate x;
- Coordinate y;
- Coordinate z;
+final Coordinate x;
+final Coordinate y;
+final Coordinate z;
  /**
   * Defining the zero-beginning points of the axes
   */
@@ -99,5 +99,8 @@ public double distanceSquarde(Point3D point)
 public double distance(Point3D point)
 {
 	return Math.sqrt(distanceSquarde(point));
+}
+public double getX() {
+	return this.x.coord;
 }
 }
