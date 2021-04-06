@@ -2,8 +2,10 @@ package geometries;
 
 import java.util.List;
 
+
 import primitives.Point3D;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 public class Plane implements Geometry {
@@ -54,13 +56,22 @@ public class Plane implements Geometry {
 
         // (P0 - Q0)
         Vector P0Q0 = ray.getP0().subtract(this.q0);
-
+        try {
+        }catch(Exception ex) {
+          return null;
+        }
+          
         // (N*V)
+        	
         double NV = normal.dotProduct(ray.getDir());
+        if(Util.isZero(NV))
+        {
+            return null;
+        }
 
         // (P0 - Q0)/(N*V)
         Vector P0Q0_NV = P0Q0.scale(1/NV);
-
+        
         // t = - N*(P0 - Q0)/(N*V)
         double t = revN.dotProduct(P0Q0_NV);
 
