@@ -1,6 +1,5 @@
 package geometries;
 
-import primitives.Point3D;
 import primitives.Ray;
 
 import java.util.ArrayList;
@@ -21,12 +20,14 @@ public class Geometries implements Intersectable {
     public void add(Intersectable... geometries) {
         this.list.addAll(Arrays.asList(geometries));
     }
-
+/**
+ * Returns all cuts with the shapes and also the name of the shape
+ */
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
-        List<Point3D> result = new ArrayList<>();
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
+    	List<GeoPoint> result = new ArrayList<>();
         for (Intersectable intersectable: list) {
-            List<Point3D> temp = intersectable.findIntsersections(ray);
+            List<GeoPoint> temp = intersectable.findGeoIntersections(ray);
             if(temp != null)
                 result.addAll(temp);
         }
@@ -35,5 +36,6 @@ public class Geometries implements Intersectable {
             return result;
         else
             return null;
-    }
+	}
+
 }

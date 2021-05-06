@@ -3,11 +3,12 @@ package geometries;
 import java.util.ArrayList;
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 	private Point3D center;
 	private double radius;
 
@@ -36,7 +37,7 @@ public class Sphere implements Geometry {
 	}
 
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 
 		// u = O - P0
 		Vector u = this.center.subtract(ray.getP0());
@@ -58,20 +59,20 @@ public class Sphere implements Geometry {
 		double t2 = tm + th;
 
 		if (t1 > 0 || t2 > 0) {
-			List<Point3D> list = new ArrayList<Point3D>();
+			List<GeoPoint> list = new ArrayList<GeoPoint>();
 
 			// take only t1 > 0
 			if (t1 > 0) {
 				// P1 = P0 + t1V
 				Point3D P1 = ray.getPoint(t1);
-				list.add(P1);
+				list.add(new GeoPoint(this, P1));
 			}
 
 			// take only t2 > 0
 			if (t2 > 0) {
 				// P2 = P0 + t2V
 				Point3D P2 = ray.getPoint(t2);
-				list.add(P2);
+				list.add(new GeoPoint(this, P2));
 			}
 			
 			return list;
@@ -80,5 +81,6 @@ public class Sphere implements Geometry {
 		else
 			return null;
 	}
+
 	
 }

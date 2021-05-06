@@ -1,6 +1,7 @@
 package renderer;
 
 import java.util.MissingResourceException;
+import geometries.Intersectable.GeoPoint;
 
 import elements.Camera;
 import primitives.Color;
@@ -54,7 +55,7 @@ public class Render {
 			for(int j = 0; j < imageWriter.getNy(); j++) {
 			Ray ray=camera.constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), j, i);
 			Color color=rayTracerBase.traceRay(ray);
-			imageWriter.writePixel(i, j, color);
+			imageWriter.writePixel(j, i, color);
 	}
 		
 	}

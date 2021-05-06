@@ -2,19 +2,13 @@ package elements;
 
 import primitives.Color;
 
-public class AmbientLight {
-	private Color intensity;
+public class AmbientLight extends Light {
 
 	/*
 	 * Calculate lighting by multiplying the color by a reduction factor
 	 */
 	public AmbientLight(Color color, double Ka) {
-		intensity = color.scale(Ka);
+		super(color.scale(Ka));
 
 	}
-
-	public Color getIntensity() {
-		return intensity;
-	}
-
 }

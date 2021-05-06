@@ -1,8 +1,11 @@
 package geometries;
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import geometries.Intersectable.GeoPoint;
 import primitives.*;
 import static primitives.Util.*;
 
@@ -12,7 +15,7 @@ import static primitives.Util.*;
  * 
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
 	/**
 	 * List of polygon's vertices
 	 */
@@ -94,9 +97,9 @@ public class Polygon implements Geometry {
 	 * Insert in the list the number of points of intersection of the plane with the ray
 	 */
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
-		List<Point3D> result = plane.findIntsersections(ray);
+		List<GeoPoint> result = plane.findGeoIntersections(ray);
      /**
       * When there are no points of intersection
       */
@@ -136,8 +139,11 @@ public class Polygon implements Geometry {
       */
 		if(positive != 0 && negative != 0)
 			return null;
-		else
+		else {
+			for(GeoPoint point: result)
+				point.geometry = this;
 			return result;
+		}
 	}
 
 }

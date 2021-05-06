@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -8,7 +9,7 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 	private Point3D q0;
 	private Vector normal;
 
@@ -48,9 +49,8 @@ public class Plane implements Geometry {
 		return normal;
 	}
 
-
 	@Override
-	public List<Point3D> findIntsersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		// -N
         Vector revN = normal.scale(-1);
 
@@ -77,10 +77,9 @@ public class Plane implements Geometry {
 
         if(t > 0)
             // P = P0 + tV
-            return List.of(ray.getPoint(t));
+            return List.of(new GeoPoint(this, ray.getPoint(t)));
 
         return null;
-
 	}
 
 
