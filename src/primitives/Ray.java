@@ -4,6 +4,7 @@ import java.util.List;
 import geometries.Intersectable.GeoPoint;
 
 public class Ray {
+	private static final double DELTA = 0.1;
 	private Point3D p0;
 	private Vector dir;
 
@@ -32,6 +33,11 @@ public class Ray {
 	public Ray(Point3D p0, Vector dir) {
 		this.p0 = p0;
 		this.dir = dir.normalize();
+	}
+	public Ray(Point3D point, Vector v, Vector n) {
+		Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : -DELTA);
+		this.p0 = point.add(delta);
+		this.dir=v.normalize();
 	}
 
 	@Override
