@@ -4,7 +4,7 @@ import java.util.List;
 import geometries.Intersectable.GeoPoint;
 
 public class Ray {
-	private static final double DELTA = 0.1;
+	private static final double DELTA = 0.1; //A constant that raises the ray so that it does not come out of the surface exactly
 	private Point3D p0;
 	private Vector dir;
 
@@ -34,6 +34,14 @@ public class Ray {
 		this.p0 = p0;
 		this.dir = dir.normalize();
 	}
+	/**
+	 * We calculated a vector product with a vector and normalized to a point and obtained an angle.
+       If it is positive the delta is positive and the direction of the vector is positive 
+       and the same is true for the negative.
+	 * @param point
+	 * @param v
+	 * @param n
+	 */
 	public Ray(Point3D point, Vector v, Vector n) {
 		Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : -DELTA);
 		this.p0 = point.add(delta);

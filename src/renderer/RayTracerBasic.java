@@ -43,7 +43,14 @@ public class RayTracerBasic extends RayTracerBase {
 		color = color.add(calcLocalEffects(point, ray, k));
 		return 1 == level ? color : color.add(calcGlobalEffects(point, ray, level, k));
 	}
-
+    /**
+     * 
+     * @param geopoint
+     * @param ray
+     * @param level
+     * @param k
+     * @return
+     */
 	private Color calcGlobalEffects(GeoPoint geopoint, Ray ray, int level, double k) {
 		Color color = Color.BLACK;
 		Vector n = geopoint.geometry.getNormal(geopoint.point);

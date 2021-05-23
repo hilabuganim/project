@@ -130,25 +130,34 @@ public class ReflectionRefractionTests {
                 .setViewPlaneSize(200, 200).setDistance(1000);
 
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
-        Triangle triangle1 = new Triangle(new Point3D(-400, 400, -8000), new Point3D(-400, 0, -8000), new Point3D(0, 200, -8000));
-        Triangle triangle2 = new Triangle(new Point3D(400, 400, -8000), new Point3D(0, 200, -8000), new Point3D(400, 0, -8000));
-        Triangle triangle3 = new Triangle(new Point3D(-400, 0, -8000), new Point3D(0, 200, -8000), new Point3D(0, -200, -8000));
-        Triangle triangle4 = new Triangle(new Point3D(0, 200, -8000), new Point3D(0, -200, -8000), new Point3D(400, 0, -8000));
+        Triangle triangle1 = new Triangle(new Point3D(-400, 800, -12000), new Point3D(-400, 400, -12000), new Point3D(0, 600, -12000));
+        Triangle triangle2 = new Triangle(new Point3D(400, 800, -12000), new Point3D(0, 600, -12000), new Point3D(400, 400, -12000));
+        Triangle triangle3 = new Triangle(new Point3D(-400, 400, -12000), new Point3D(0, 600, -12000), new Point3D(0, 200, -12000));
+        Triangle triangle4 = new Triangle(new Point3D(0, 600, -12000), new Point3D(0, 200, -12000), new Point3D(400, 400, -12000));
         Plane plane=(Plane) new Plane(new Point3D(0, -200, -5200), new Vector(0, 1, 0)).setMaterial(new Material().setkR(0.3).setkS(0.5).setnShininess(60));
-        Sphere sphere=(Sphere) new Sphere(new Point3D(470, -100, -5000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkR(0.9).setkT(0.1).setnShininess(60));;
-        Sphere sphere1=(Sphere) new Sphere(new Point3D(-370, -100, -4000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkT(1).setkR(0.5).setnShininess(60));;
+        Sphere sphere=(Sphere) new Sphere(new Point3D(450, -60, -5000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkT(0.1).setnShininess(60));; //right sphere
+        Sphere sphere1=(Sphere) new Sphere(new Point3D(-370, -100, -4000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //left sphere
+        Sphere sphere2=(Sphere) new Sphere(new Point3D(0, 700, -12000), 900).setEmmission(new Color(48, 45, 47)).setMaterial(new Material().setkT(0.9).setnShininess(60));; //big sphere
+        Sphere sphere3=(Sphere) new Sphere(new Point3D(-350, -130, -3700), 50).setEmmission(new Color(68, 175, 217)).setMaterial(new Material().setkR(0.8).setnShininess(60));; //light blue sphere
+        Sphere sphere4=(Sphere) new Sphere(new Point3D(-335, -150, -3500), 25).setEmmission(new Color(107, 37, 145)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //small purple sphere
+        Sphere sphere5=(Sphere) new Sphere(new Point3D(430, -80, -3500), 70).setEmmission(new Color(184, 58, 217)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //big purple sphere
+
+        
+        
         Color[] colors = {new Color(68, 175, 217), new Color(184, 58, 217), new Color(52, 45, 182), new Color(107, 37, 145)};
+        
 
         triangle1.setEmmission(colors[0]);
         triangle2.setEmmission(colors[1]);
         triangle3.setEmmission(colors[2]);
         triangle4.setEmmission(colors[3]);
-        scene.geometries.add(triangle1, triangle2, triangle3, triangle4, plane, sphere, sphere1); //
+        scene.geometries.add(triangle1, triangle2, triangle3, triangle4, plane, sphere, sphere1, sphere2, sphere3, sphere4, sphere5); //
                 
 
         scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1), 1, 4E-5, 2E-7));
-        //scene.lights.add(new PointLight(new Color(700, 400, 400), new Point3D(400, 200,-4000), 1, 4E-5, 2E-7));
-        scene.lights.add(new PointLight(new Color(700, 400, 400), new Point3D(-100, 100, -7000), 1, 4E-5, 2E-7));
+        scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(-370, -100,-3500), new Vector(0, 0, -1), 1, 0.00002, 0.00005));
+        scene.lights.add(new PointLight(new Color(700, 400, 400), new Point3D(0, 100, -4000), 1, 4E-5, 2E-7)); //main light
+        //scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(-370, -100,-3500), new Vector(0, 0, -1), 1, 0.00002, 0.00005));
 
 
         ImageWriter imageWriter = new ImageWriter("jctLogo", 600, 600);
