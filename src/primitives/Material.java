@@ -3,11 +3,11 @@ package primitives;
 public class Material {
 	public double kD=0, kS=0, kR=0, kT=0;
 	
-	public Material setkR(double kR) {
+	public Material setkR(double kR) { //hishtakfut
 		this.kR = kR;
 		return this;
 	}
-	public Material setkT(double kT) {
+	public Material setkT(double kT) { //shkifut
 		this.kT = kT;
 		return this;
 	}

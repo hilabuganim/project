@@ -1,9 +1,9 @@
 package primitives;
 
 public class Point3D {
-final Coordinate x;
-final Coordinate y;
-final Coordinate z;
+public final Coordinate x;
+public final Coordinate y;
+public final Coordinate z;
  /**
   * Defining the zero-beginning points of the axes
   */

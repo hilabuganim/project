@@ -13,6 +13,7 @@ import scene.Scene;
  *
  * @author Dan
  */
+
 public class ShadowTests {
     private Scene scene = new Scene("Test scene");
     private Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
@@ -23,6 +24,7 @@ public class ShadowTests {
      */
     @Test
     public void sphereTriangleInitial() {
+    	RayTracerBasic.RADIUS=0.05;
         scene.geometries.add( //
                 new Sphere(new Point3D(0, 0, -200), 60) //
                         .setEmmission(new Color(java.awt.Color.BLUE)) //
@@ -48,6 +50,7 @@ public class ShadowTests {
      */
     @Test
     public void sphereTriangleChangingTriangle1() {
+    	RayTracerBasic.RADIUS=0.1;
         scene.geometries.add( //
                 new Sphere(new Point3D(0, 0, -200), 60) //
                         .setEmmission(new Color(java.awt.Color.BLUE)) //
@@ -73,6 +76,7 @@ public class ShadowTests {
      */
     @Test
     public void sphereTriangleChangingTriangle2() {
+    	RayTracerBasic.RADIUS=0.01;
         scene.geometries.add( //
                 new Sphere(new Point3D(0, 0, -200), 60) //
                         .setEmmission(new Color(java.awt.Color.BLUE)) //
@@ -98,6 +102,7 @@ public class ShadowTests {
      */
     @Test
     public void sphereTriangleChangingLight1() {
+    	RayTracerBasic.RADIUS=0.01;
         scene.geometries.add( //
                 new Sphere(new Point3D(0, 0, -200), 60) //
                         .setEmmission(new Color(java.awt.Color.BLUE)) //
@@ -123,6 +128,7 @@ public class ShadowTests {
      */
     @Test
     public void sphereTriangleChangingLight2() {
+    	RayTracerBasic.RADIUS=0.01;
         scene.geometries.add( //
                 new Sphere(new Point3D(0, 0, -200), 60) //
                         .setEmmission(new Color(java.awt.Color.BLUE)) //
@@ -149,6 +155,7 @@ public class ShadowTests {
      */
     @Test
     public void trianglesSphere() {
+    	RayTracerBasic.RADIUS=0.1;
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
 
         scene.geometries.add( //
