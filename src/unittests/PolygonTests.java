@@ -19,7 +19,7 @@ public class PolygonTests {
 
     /**
      * Test method for
-     * {@link geometries.Polygon#Polygon(primitives.Point3D, primitives.Point3D, primitives.Point3D, primitives.Point3D)}.
+     * {@link Polygon#Polygon(Point3D, Point3D, Point3D, Point3D)}.
      */
     @Test
     public void testConstructor() {
@@ -80,7 +80,7 @@ public class PolygonTests {
     }
 
     /**
-     * Test method for {@link geometries.Polygon#getNormal(primitives.Point3D)}.
+     * Test method for {@link Polygon#getNormal(Point3D)}.
      */
     @Test
     public void testGetNormal() {

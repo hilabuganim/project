@@ -37,6 +37,11 @@ public class Tube extends Geometry {
 	}
 
 	@Override
+	public Point3D getCenter() {
+		return null;
+	}
+
+	@Override
 	public List<GeoPoint> findGeoIntersections(Ray ray) {
 		return null;
 	}

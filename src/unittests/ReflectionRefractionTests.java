@@ -7,6 +7,7 @@ import elements.AmbientLight;
 import elements.Camera;
 import elements.PointLight;
 import elements.SpotLight;
+import geometries.Geometries;
 import geometries.Plane;
 import geometries.Sphere;
 import geometries.Triangle;
@@ -126,35 +127,37 @@ public class ReflectionRefractionTests {
     }
     @Test
     public void jctLogo() {
+        // Without Bounding Volume Hierarchy: 3 sec 761 ms
+        // With Bounding Volume Hierarchy: 3 sec 680 ms
     	RayTracerBasic.RADIUS=0.01;
     	RayTracerBasic.NUM_OF_RAYS=0;
         Camera camera = new Camera(new Point3D(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200).setDistance(1000);
 
         scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.15));
+
         Triangle triangle1 = new Triangle(new Point3D(-400, 800, -12000), new Point3D(-400, 400, -12000), new Point3D(0, 600, -12000));
         Triangle triangle2 = new Triangle(new Point3D(400, 800, -12000), new Point3D(0, 600, -12000), new Point3D(400, 400, -12000));
         Triangle triangle3 = new Triangle(new Point3D(-400, 400, -12000), new Point3D(0, 600, -12000), new Point3D(0, 200, -12000));
         Triangle triangle4 = new Triangle(new Point3D(0, 600, -12000), new Point3D(0, 200, -12000), new Point3D(400, 400, -12000));
-        Plane plane=(Plane) new Plane(new Point3D(0, -200, -5200), new Vector(0, 1, 0)).setMaterial(new Material().setkR(0.3).setkS(0.5).setnShininess(60));
-        Sphere sphere=(Sphere) new Sphere(new Point3D(450, -60, -5000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkT(0.1).setnShininess(60));; //right sphere
-        Sphere sphere1=(Sphere) new Sphere(new Point3D(-370, -100, -4000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //left sphere
         Sphere sphere2=(Sphere) new Sphere(new Point3D(0, 700, -12000), 900).setEmmission(new Color(48, 45, 47)).setMaterial(new Material().setkT(0.9).setnShininess(60));; //big sphere
+        Sphere sphere=(Sphere) new Sphere(new Point3D(450, -60, -5000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkT(0.1).setnShininess(60));; //right sphere
+        Sphere sphere5=(Sphere) new Sphere(new Point3D(430, -80, -3500), 70).setEmmission(new Color(184, 58, 217)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //big purple sphere
+        Sphere sphere1=(Sphere) new Sphere(new Point3D(-370, -100, -4000), 100).setEmmission(new Color(0, 0, 100)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //left sphere
         Sphere sphere3=(Sphere) new Sphere(new Point3D(-350, -130, -3700), 50).setEmmission(new Color(68, 175, 217)).setMaterial(new Material().setkR(0.8).setnShininess(60));; //light blue sphere
         Sphere sphere4=(Sphere) new Sphere(new Point3D(-335, -150, -3500), 25).setEmmission(new Color(107, 37, 145)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //small purple sphere
-        Sphere sphere5=(Sphere) new Sphere(new Point3D(430, -80, -3500), 70).setEmmission(new Color(184, 58, 217)).setMaterial(new Material().setkR(0.5).setnShininess(60));; //big purple sphere
+        Plane plane=(Plane) new Plane(new Point3D(0, -200, -5200), new Vector(0, 1, 0)).setMaterial(new Material().setkR(0.3).setkS(0.5).setnShininess(60));
 
-        
-        
         Color[] colors = {new Color(68, 175, 217), new Color(184, 58, 217), new Color(52, 45, 182), new Color(107, 37, 145)};
-        
+
+        Geometries geometries = new Geometries(triangle1, triangle2, triangle3, triangle4, plane, sphere, sphere1, sphere2, sphere3, sphere4, sphere5);
+        geometries.buildHierarchy(3, 1);
 
         triangle1.setEmmission(colors[0]);
         triangle2.setEmmission(colors[1]);
         triangle3.setEmmission(colors[2]);
         triangle4.setEmmission(colors[3]);
-        scene.geometries.add(triangle1, triangle2, triangle3, triangle4, plane, sphere, sphere1, sphere2, sphere3, sphere4, sphere5); //
-                
+        scene.geometries.add(geometries);
 
         scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(60, 50, 0), new Vector(0, 0, -1), 1, 4E-5, 2E-7));
         scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point3D(-370, -100,-3500), new Vector(0, 0, -1), 1, 0.00002, 0.00005));
@@ -166,7 +169,8 @@ public class ReflectionRefractionTests {
         Render render = new Render() //
                 .setImageWriter(imageWriter) //
                 .setCamera(camera) //
-                .setRayTracerBase(new RayTracerBasic(scene));
+                .setRayTracerBase(new RayTracerBasic(scene))
+                .setMultithreading(0).setDebugPrint();
 
         render.renderImage();
         render.writeToImage();
@@ -174,44 +178,45 @@ public class ReflectionRefractionTests {
 
     }
     
-    @Test
-    public void test1() {
-        Scene scene = new Scene("Tst soft shadow");
-        Sphere sphere = new Sphere(new Point3D(0.0, 0, -5000), 350);
-        sphere.setMaterial(new Material().setkD(1).setkS(1).setnShininess(20));
-        sphere.setEmmission(new Color(0, 0, 100));
-        scene.geometries.add(sphere);
-
-        sphere = new Sphere(new Point3D(-800, 0, -5000), 350);
-        sphere.setEmmission(new Color(100, 0, 5));
-        scene.geometries.add(sphere);
-
-        sphere = new Sphere(new Point3D(800, 0, -5000), 350);
-        sphere.setEmmission(new Color(28, 100, 0));
-        scene.geometries.add(sphere);
-
-
-        scene.lights.add(new SpotLight(new Color(17, 17, 17), new Point3D(0, 1000, -4500), new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
-
-        Plane plane = new Plane(new Point3D(0, -400, 0), new Vector(0, 1, 0));
-        plane.setEmmission(new Color(0, 0, 0));
-        plane.setMaterial(new Material().setkR(0.4).setkS(0));
-        scene.geometries.add(plane);
-
-            scene.lights.add(new SpotLight(new Color(171, 171, 171), new Point3D(0, 1000, -4000), new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
-
-            ImageWriter imageWriter = new ImageWriter("soft shadow", 500, 500);
-
-
-            Render render = new Render() //
-                    .setImageWriter(imageWriter) //
-                    .setCamera((new Camera(new Point3D(0, 0, 1000), new Vector(-1, 0, 0), new Vector(0, 0, -1)).setDistance(1000).setViewPlaneSize(500, 500))) //
-                    .setRayTracerBase(new RayTracerBasic(scene));
-
-            render.renderImage();
-            render.writeToImage();
-
-    }
+//    @Test
+//    public void test1() {
+//        Scene scene = new Scene("Tst soft shadow");
+//        Sphere sphere = new Sphere(new Point3D(0.0, 0, -5000), 350);
+//        sphere.setMaterial(new Material().setkD(1).setkS(1).setnShininess(20));
+//        sphere.setEmmission(new Color(0, 0, 100));
+//        scene.geometries.add(sphere);
+//
+//        sphere = new Sphere(new Point3D(-800, 0, -5000), 350);
+//        sphere.setEmmission(new Color(100, 0, 5));
+//        scene.geometries.add(sphere);
+//
+//        sphere = new Sphere(new Point3D(800, 0, -5000), 350);
+//        sphere.setEmmission(new Color(28, 100, 0));
+//        scene.geometries.add(sphere);
+//
+//
+//        scene.lights.add(new SpotLight(new Color(17, 17, 17), new Point3D(0, 1000, -4500), new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
+//
+//        Plane plane = new Plane(new Point3D(0, -400, 0), new Vector(0, 1, 0));
+//        plane.setEmmission(new Color(0, 0, 0));
+//        plane.setMaterial(new Material().setkR(0.4).setkS(0));
+//        scene.geometries.add(plane);
+//
+//            scene.lights.add(new SpotLight(new Color(171, 171, 171), new Point3D(0, 1000, -4000), new Vector(-2, -2, -3), 0, 0.000001, 0.0000005));
+//
+//            ImageWriter imageWriter = new ImageWriter("soft shadow", 500, 500);
+//
+//
+//            Render render = new Render() //
+//                    .setImageWriter(imageWriter) //
+//                    .setCamera((new Camera(new Point3D(0, 0, 1000), new Vector(-1, 0, 0), new Vector(0, 0, -1)).setDistance(1000).setViewPlaneSize(500, 500))) //
+//                    .setRayTracerBase(new RayTracerBasic(scene))
+//                    .setMultithreading(0);
+//
+//            render.renderImage();
+//            render.writeToImage();
+//
+//    }
     @Test
     public void softShadow() {
     	RayTracerBasic.RADIUS=0.03;

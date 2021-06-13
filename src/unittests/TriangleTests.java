@@ -21,7 +21,7 @@ import primitives.Vector;
 public class TriangleTests {
 
 	/**
-	 * Test method for {@link geometries.Polygon#getNormal(primitives.Point3D)}.
+	 * Test method for {@link geometries.Polygon#getNormal(Point3D)}.
 	 * Creates a triangle by three points and checks what the vector 
 	 * at a given point expects to get the required vector
 	 */
@@ -36,7 +36,7 @@ public class TriangleTests {
 	}
 	
 	/**
-	 * Test method for {@link geometries.Triangle#findIntersections(primitives.Ray)}.
+	 * Test method for {@link Triangle#findIntersections(Ray)}.
 	 */
 	@Test
 	public void testFindIntersections() {

@@ -21,7 +21,7 @@ import primitives.Vector;
 public class SphereTests {
 
 	/**
-	 * Test method for {@link geometries.Sphere#getNormal(primitives.Point3D)}.
+	 * Test method for {@link Sphere#getNormal(Point3D)}.
 	 */
 	@Test
 	public void testGetNormal() {
@@ -34,7 +34,7 @@ public class SphereTests {
 
 
     /**
-     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+     * Test method for {@link Sphere#findIntersections(Ray)}.
      */
     @Test
     public void testFindIntersections() {

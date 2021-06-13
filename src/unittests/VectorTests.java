@@ -17,7 +17,7 @@ public class VectorTests {
      Vector v3 = new Vector(0, 3, -2);
 
 	/**
-	 * Test method for {@link primitives.Vector#normalize()}.
+	 * Test method for {@link Vector#normalize()}.
 	 * The test checks if a vector is equal to the same normal vector
 	 * The test checks if the vector after normalization is equal to the unit vector
 	 */
@@ -32,7 +32,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#normalized()}.
+	 * Test method for {@link Vector#normalized()}.
 	 * The test checks if the normalized vector is a new vector
        and expect to get them equal then give false
        The test checks if the vector u is equal to the unit vector
@@ -46,7 +46,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#add(primitives.Vector)}.
+	 * Test method for {@link Vector#add(Vector)}.
 	 * A test that checks if adding vectors returns a result as required
 	 * excepted to get zero point
 	 */
@@ -57,7 +57,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#subtract(primitives.Vector)}.
+	 * Test method for {@link Vector#subtract(Vector)}.
 	 *A test that gets a point and calculates the subtraction between two vectors
 	 and checks if its correct
 	 */
@@ -68,7 +68,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#scale(double)}.
+	 * Test method for {@link Vector#scale(double)}.
 	 * The vector recipient multiplies it by a scalar 
 	 * and checks if the result is indeed as expected
 	 */
@@ -81,7 +81,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
+	 * Test method for {@link Vector#crossProduct(Vector)}.
 	 * Vector multiplication between vectors Expects to get the length of a new vector
 	 */
 	@Test
@@ -109,7 +109,7 @@ public class VectorTests {
 	    }
 
 	/**
-	 * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
+	 * Test method for {@link Vector#dotProduct(Vector)}.
 	 * A scalar product between vectors expects to get a zero result
 	 * Scalar multiplication between vectors expects to get the required result
 	 */
@@ -120,7 +120,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#lengthSquared()}.
+	 * Test method for {@link Vector#lengthSquared()}.
 	 * A square-length function between vectors expects to get the required result
 	 */
 	@Test
@@ -129,7 +129,7 @@ public class VectorTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#length()}.
+	 * Test method for {@link Vector#length()}.
 	 * The length function between vectors expects to get a result as required
 	 */
 	@Test

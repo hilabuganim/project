@@ -20,7 +20,7 @@ import primitives.Vector;
 public class TubeTests {
 
 	/**
-	 * Test method for {@link geometries.Tube#getNormal(primitives.Point3D)}.
+	 * Test method for {@link Tube#getNormal(Point3D)}.
 	 * A test that gets a point and expects to get the normal of that point
 	 */
 	@Test

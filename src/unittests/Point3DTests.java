@@ -17,7 +17,7 @@ import org.junit.Test;
 public class Point3DTests {
 
 	/**
-	 * Test method for {@link primitives.Point3D#add(primitives.Vector)}.
+	 * Test method for {@link Point3D#add(Vector)}.
 	 */
 	@Test
 	public void testAdd() {
@@ -28,7 +28,7 @@ public class Point3DTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Point3D#subtract(primitives.Point3D)}.
+	 * Test method for {@link Point3D#subtract(Point3D)}.
 	 */
 	@Test
 	public void testSubtract() {
@@ -40,7 +40,7 @@ public class Point3DTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Point3D#distanceSquarde(primitives.Point3D)}.
+	 * Test method for {@link Point3D#distanceSquarde(Point3D)}.
 	 */
 	@Test
 	public void testDistanceSquarde() {
@@ -51,7 +51,7 @@ public class Point3DTests {
 	}
 
 	/**
-	 * Test method for {@link primitives.Point3D#distance(primitives.Point3D)}.
+	 * Test method for {@link Point3D#distance(Point3D)}.
 	 */
 	@Test
 	public void testDistance() {
